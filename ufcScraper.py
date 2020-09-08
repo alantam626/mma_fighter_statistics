@@ -2,7 +2,7 @@ import requests, bs4    #Importing Requests library and BeautifulSoup 4 scrapper
 
 res = requests.get('http://www.ufcstats.com/fighter-details/cf946e03ba2e7666') #Requesting webdata
 res.raise_for_status()  #Check for error, if error produce exception
-KevinUFC = bs4.BeautifulSoup(res.text) #Create a BeautifulSoup object from the html text named kevin
+KevinUFC = bs4.BeautifulSoup(res.text, "html.parser") #Create a BeautifulSoup object from the html text named kevin
 fighterDetails = KevinUFC.select('div > ul > li') #Querying Kevin object and getting an iterable object (we can use a for loop on, almost like a list) with Kevin's info 
 
 fighterDetailsList = [] #Creating an empty list
@@ -19,7 +19,7 @@ for info in fighterDetails: #For loop, iterating through the fighter details
 
 res = requests.get('http://www.fightmatrix.com/fighter-profile/Kevin+Aguilar/58629/') #Requesting webdata
 res.raise_for_status()  #Check for error, if error produce exception
-KevinMatrix = bs4.BeautifulSoup(res.text) #Create a BeautifulSoup object from the html text named kevin
+KevinMatrix = bs4.BeautifulSoup(res.text, "html.parser") #Create a BeautifulSoup object from the html text named kevin
 fighterDetails = KevinMatrix.select('.tdRank > div') #Querying Kevin object and getting an iterable object (we can use a for loop on, almost like a list) with Kevin's info 
 for info in fighterDetails: #For loop, iterating through the fighter details
 	fighterDetailsList.append(info.get_text().strip())
